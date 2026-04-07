@@ -194,28 +194,6 @@
   display: none;
 }
 
-.checkbox-group span {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: #f3f3f3;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  transition: 0.2s;
-  min-width: 70px;
-  text-align: center;
-}
-
-.checkbox-group input:checked + span {
-  background: #333;
-  color: #fff;
-  border-color: #333;
-}
-
-.checkbox-group span:active {
-  transform: scale(0.96);
-}
-
 /* ===== Responsive ===== */
   @media (max-width: 480px) {
     .radio-group,
