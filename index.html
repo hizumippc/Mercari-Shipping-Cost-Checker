@@ -33,17 +33,31 @@
     <label><input type="radio" name="thickness" value="999"><span>それ以上</span></label>
   </div>
 
-  <h2>サイズ（3辺合計）</h2>
-  <div class="radio-row">
-	 <label><input type="radio" name="size" value="30"><span>〜30cm</span></label>
-    <label><input type="radio" name="size" value="60" checked><span>〜60cm</span></label>
-    <label><input type="radio" name="size" value="80"><span>〜80cm</span></label>
-    <label><input type="radio" name="size" value="100"><span>〜100cm</span></label>
-    <label><input type="radio" name="size" value="120"><span>〜120cm</span></label>
-    <label><input type="radio" name="size" value="160"><span>〜160cm</span></label>
-    <label><input type="radio" name="size" value="200"><span>〜200cm</span></label>
-    <label><input type="radio" name="size" value="450"><span>それ以上</span></label>
-  </div>
+	<h2>サイズ（3辺合計）</h2>
+	
+	<div class="radio-row">
+	  <label><input type="radio" name="size" value="30"><span>〜30cm</span></label>
+	  <label><input type="radio" name="size" value="60" checked><span>〜60cm</span></label>
+	  <label><input type="radio" name="size" value="80"><span>〜80cm</span></label>
+	  <label><input type="radio" name="size" value="100"><span>〜100cm</span></label>
+	</div>
+	<div class="select-wrap">
+	  <select id="sizeSelect">
+	    <option value="">それ以上を選択</option>
+	    <option value="120">〜120cm</option>
+	    <option value="140">〜140cm</option>
+	    <option value="160">〜160cm</option>
+	    <option value="170">〜170cm</option>
+	    <option value="180">〜180cm</option>
+	    <option value="200">〜200cm</option>
+	    <option value="250">〜250cm</option>
+	    <option value="300">〜300cm</option>
+	    <option value="350">〜350cm</option>
+	    <option value="400">〜400cm</option>
+	    <option value="450">〜450cm</option>
+	    <option value="999">450cm以上</option>
+	  </select>
+	</div>
 
   <h2>重さ</h2>
   <div class="radio-row">
