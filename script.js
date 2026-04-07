@@ -220,11 +220,22 @@ function getValue(name){
   return Number(document.querySelector(`input[name="${name}"]:checked`).value);
 }
 
+function getSizeValue() {
+  const radio = document.querySelector('input[name="size"]:checked');
+  const select = document.getElementById("sizeSelect");
+
+  if (select.value) {
+    return Number(select.value);
+  }
+
+  return Number(radio.value);
+}
+
 function check() {
   const resultEl = document.getElementById("result");
 
   const t = getValue("thickness");
-  const s = getValue("size");
+  const s = getSizeValue();
   const w = getValue("weight");
 
   const available = services.filter(x =>
@@ -240,42 +251,47 @@ function check() {
 
   available.sort((a, b) => {
     if (a.price !== b.price) return a.price - b.price;
-  
+
     if (s === 30) {
       if (a.name === "ゆうパケットポストmini") return -1;
       if (b.name === "ゆうパケットポストmini") return 1;
     }
-  
+
     if (a.name === "ゆうパケットプラス") return -1;
     if (b.name === "ゆうパケットプラス") return 1;
-  
+
     return 0;
   });
 
-    const medals = ["🥇","🥈","🥉"];
-    resultEl.innerHTML = "...";
+  const medals = ["🥇","🥈","🥉"];
+  resultEl.innerHTML = "";
 
-    available.slice(0,3).forEach((x,i)=>{
-      resultEl.innerHTML += `
-      <div class="item">
-        <div class="row">
-          <div class="left">
-            <div class="rankIcon">${medals[i]}</div>
-            <div class="rankNum">${i+1}位</div>
-          </div>
-          <div class="right">
-            <div class="nameLine">${x.name} / <span class="price">${x.price}円</span></div>
-            <div class="detail">${x.detail}</div>
-            <div class="size">${x.sizeText}</div>
-            <div class="place">発送場所：${x.place}</div>
-          </div>
+  available.slice(0,3).forEach((x,i)=>{
+    resultEl.innerHTML += `
+    <div class="item">
+      <div class="row">
+        <div class="left">
+          <div class="rankIcon">${medals[i]}</div>
+          <div class="rankNum">${i+1}位</div>
         </div>
-      </div>`;
-    });
+        <div class="right">
+          <div class="nameLine">${x.name} / <span class="price">${x.price}円</span></div>
+          <div class="detail">${x.detail}</div>
+          <div class="size">${x.sizeText}</div>
+          <div class="place">発送場所：${x.place}</div>
+        </div>
+      </div>
+    </div>`;
+  });
 }
 
 document.querySelectorAll("input").forEach(el=>{
   el.addEventListener("change", check);
+});
+
+document.getElementById("sizeSelect").addEventListener("change", () => {
+  document.querySelectorAll('input[name="size"]').forEach(el => el.checked = false);
+  check();
 });
 
 check();
