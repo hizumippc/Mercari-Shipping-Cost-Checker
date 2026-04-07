@@ -221,6 +221,11 @@ function getValue(name){
   return el ? Number(el.value) : 0;
 }
 
+function getCheckedPlaces() {
+  return Array.from(document.querySelectorAll('input[name="place"]:checked'))
+    .map(el => el.value);
+}
+
 // ▼サイズ（ラジオのみ）
 function getSizeValue() {
   const radio = document.querySelector('input[name="size"]:checked');
@@ -234,11 +239,22 @@ function check() {
   const s = getSizeValue();
   const w = getValue("weight");
 
-  const available = services.filter(x =>
+const selectedPlaces = getCheckedPlaces();
+
+const available = services.filter(x => {
+  const basicMatch =
     t <= x.thickness &&
     s <= x.size &&
-    w <= x.weight
-  );
+    w <= x.weight;
+
+  // ▼発送場所チェックなし → 全部OK
+  if (selectedPlaces.length === 0) return basicMatch;
+
+  // ▼発送場所チェックあり → placeに含まれるか
+  const placeMatch = selectedPlaces.some(p => x.place.includes(p));
+
+  return basicMatch && placeMatch;
+});
 
   if (available.length === 0) {
     resultEl.innerHTML = "該当する配送方法がありません";
