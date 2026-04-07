@@ -1,0 +1,146 @@
+
+/* ===== Base ===== */
+  body {
+    font-family: sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f3f3f3;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h2 {
+    margin-top: 24px;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  label {
+    display: block;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  input[type="radio"] {
+    accent-color: #00c4cc;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: #777;
+    margin: 4px 0;
+  }
+
+/* ===== Layout ===== */
+  .radio-group,
+  .radio-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .left {
+    width: 60px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .right {
+    flex: 1;
+  }
+
+  .result {
+    margin-top: 30px;
+  }
+
+  footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+
+  footer a {
+    color: #555;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+
+  footer a:hover {
+    color: #e60023;
+    text-decoration: underline;
+  }
+
+/* ===== Component ===== */
+  .radio-group label,
+  .radio-row label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    padding: 6px 16px 6px 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .radio-group label:has(input:checked),
+  .radio-row label:has(input:checked) {
+    background: #e60023;
+    color: #fff;
+    border-color: #e60023;
+  }
+
+  .item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .rankIcon {
+    font-size: 30px;
+  }
+
+  .rankNum {
+    font-size: 14px;
+  }
+
+  .nameLine {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .price {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+  .detail,
+  .size,
+  .place {
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
+/* ===== Responsive ===== */
+  @media (max-width: 480px) {
+    .radio-group,
+    .radio-row {
+      gap: 10px;
+    }
+
+    .radio-group label,
+    .radio-row label {
+      padding: 10px 16px 10px 10px;
+    }
+  }
