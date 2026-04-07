@@ -295,3 +295,13 @@ document.getElementById("sizeSelect").addEventListener("change", () => {
 });
 
 check();
+
+const moreBtn = document.getElementById("moreBtn");
+const moreSizes = document.getElementById("moreSizes");
+
+moreBtn.addEventListener("click", () => {
+  moreSizes.classList.toggle("hidden");
+  moreBtn.textContent = moreSizes.classList.contains("hidden")
+    ? "それ以上 ▼"
+    : "それ以上 ▲";
+});
