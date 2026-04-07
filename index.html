@@ -34,20 +34,15 @@
   </div>
 
 	<h2>サイズ（3辺合計）</h2>
-	
 	<div class="radio-row">
-	
 	  <label><input type="radio" name="size" value="30" checked><span>〜30cm</span></label>
 	  <label><input type="radio" name="size" value="60"><span>〜60cm</span></label>
 	  <label><input type="radio" name="size" value="80"><span>〜80cm</span></label>
 	  <label><input type="radio" name="size" value="100"><span>〜100cm</span></label>
-	
 	  <button type="button" id="moreBtn" class="more-btn">それ以上 ▼</button>
-	
 	</div>
 	
 	<div id="moreSizes" class="radio-row more-sizes hidden">
-	
 	  <label><input type="radio" name="size" value="120"><span>〜120cm</span></label>
 	  <label><input type="radio" name="size" value="140"><span>〜140cm</span></label>
 	  <label><input type="radio" name="size" value="160"><span>〜160cm</span></label>
@@ -60,7 +55,6 @@
 	  <label><input type="radio" name="size" value="400"><span>〜400cm</span></label>
 	  <label><input type="radio" name="size" value="450"><span>〜450cm</span></label>
 	　<label><input type="radio" name="size" value="999"><span>450cm以上</span></label>
-	
 	</div>
 
   <h2>重さ</h2>
@@ -75,6 +69,18 @@
   </div>
 
   <div class="result" id="result"></div>
+
+	<h2>発送場所（任意）</h2>
+	<div class="checkbox-group">
+	  <label><input type="checkbox" name="place" value="ヤマト運輸営業所">ヤマト営業所</label>
+	  <label><input type="checkbox" name="place" value="セブン-イレブン">セブン</label>
+	  <label><input type="checkbox" name="place" value="ファミリーマート">ファミマ</label>
+	  <label><input type="checkbox" name="place" value="ローソン">ローソン</label>
+	  <label><input type="checkbox" name="place" value="郵便局">郵便局</label>
+	  <label><input type="checkbox" name="place" value="ポスト投函">ポスト</label>
+	  <label><input type="checkbox" name="place" value="PUDO">PUDO</label>
+	  <label><input type="checkbox" name="place" value="自宅集荷">自宅集荷</label>
+	</div>
 
 	<details class="links-box">
   <summary>各配送方法の詳細を見る</summary>
