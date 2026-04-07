@@ -240,10 +240,15 @@ function check() {
 
   available.sort((a, b) => {
     if (a.price !== b.price) return a.price - b.price;
-
+  
+    if (s === 30) {
+      if (a.name === "ゆうパケットポストmini") return -1;
+      if (b.name === "ゆうパケットポストmini") return 1;
+    }
+  
     if (a.name === "ゆうパケットプラス") return -1;
     if (b.name === "ゆうパケットプラス") return 1;
-
+  
     return 0;
   });
 
