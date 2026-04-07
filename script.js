@@ -221,16 +221,9 @@ function getValue(name){
   return el ? Number(el.value) : 0;
 }
 
+// ▼サイズ（ラジオのみ）
 function getSizeValue() {
   const radio = document.querySelector('input[name="size"]:checked');
-  const select = document.getElementById("sizeSelect");
-
-  // ▼プルダウン優先
-  if (select && select.value) {
-    return Number(select.value);
-  }
-
-  // ▼ラジオ fallback（null対策）
   return radio ? Number(radio.value) : 0;
 }
 
@@ -253,15 +246,16 @@ function check() {
   }
 
   available.sort((a, b) => {
+    // ▼価格優先
     if (a.price !== b.price) return a.price - b.price;
 
-    // ▼30cm時はmini優先
+    // ▼30cmならmini優先
     if (s === 30) {
       if (a.name === "ゆうパケットポストmini") return -1;
       if (b.name === "ゆうパケットポストmini") return 1;
     }
 
-    // ▼ゆうパケットプラス優先
+    // ▼同額ならゆうパケットプラス優先
     if (a.name === "ゆうパケットプラス") return -1;
     if (b.name === "ゆうパケットプラス") return 1;
 
@@ -290,31 +284,12 @@ function check() {
   });
 }
 
-// ▼ラジオ変更
+// ▼ラジオ変更で再計算
 document.querySelectorAll("input").forEach(el=>{
-  el.addEventListener("change", () => {
-    const select = document.getElementById("sizeSelect");
-
-    // ▼ラジオ選んだらプルダウン解除
-    if (el.name === "size" && select) {
-      select.value = "";
-    }
-
-    check();
-  });
+  el.addEventListener("change", check);
 });
 
-// ▼プルダウン変更
-const sizeSelect = document.getElementById("sizeSelect");
-if (sizeSelect) {
-  sizeSelect.addEventListener("change", () => {
-    // ▼ラジオ全部解除
-    document.querySelectorAll('input[name="size"]').forEach(el => el.checked = false);
-    check();
-  });
-}
-
-// ▼それ以上トグル
+// ▼それ以上トグル（折りたたみ）
 const moreBtn = document.getElementById("moreBtn");
 const moreSizes = document.getElementById("moreSizes");
 
@@ -327,5 +302,5 @@ if (moreBtn && moreSizes) {
   });
 }
 
-// 初期実行
+// ▼初期表示
 check();
