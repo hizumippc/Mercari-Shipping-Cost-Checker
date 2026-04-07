@@ -194,6 +194,10 @@
   display: none;
 }
 
+.checkbox-group label {
+  display: inline-block; 
+}
+
 /* ===== Responsive ===== */
   @media (max-width: 480px) {
     .radio-group,
