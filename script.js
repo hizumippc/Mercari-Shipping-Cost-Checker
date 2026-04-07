@@ -217,18 +217,21 @@ const services = [
 ];
 
 function getValue(name){
-  return Number(document.querySelector(`input[name="${name}"]:checked`).value);
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? Number(el.value) : 0;
 }
 
 function getSizeValue() {
   const radio = document.querySelector('input[name="size"]:checked');
   const select = document.getElementById("sizeSelect");
 
-  if (select.value) {
+  // ▼プルダウン優先
+  if (select && select.value) {
     return Number(select.value);
   }
 
-  return Number(radio.value);
+  // ▼ラジオ fallback（null対策）
+  return radio ? Number(radio.value) : 0;
 }
 
 function check() {
@@ -252,11 +255,13 @@ function check() {
   available.sort((a, b) => {
     if (a.price !== b.price) return a.price - b.price;
 
+    // ▼30cm時はmini優先
     if (s === 30) {
       if (a.name === "ゆうパケットポストmini") return -1;
       if (b.name === "ゆうパケットポストmini") return 1;
     }
 
+    // ▼ゆうパケットプラス優先
     if (a.name === "ゆうパケットプラス") return -1;
     if (b.name === "ゆうパケットプラス") return 1;
 
@@ -285,23 +290,42 @@ function check() {
   });
 }
 
+// ▼ラジオ変更
 document.querySelectorAll("input").forEach(el=>{
-  el.addEventListener("change", check);
+  el.addEventListener("change", () => {
+    const select = document.getElementById("sizeSelect");
+
+    // ▼ラジオ選んだらプルダウン解除
+    if (el.name === "size" && select) {
+      select.value = "";
+    }
+
+    check();
+  });
 });
 
-document.getElementById("sizeSelect").addEventListener("change", () => {
-  document.querySelectorAll('input[name="size"]').forEach(el => el.checked = false);
-  check();
-});
+// ▼プルダウン変更
+const sizeSelect = document.getElementById("sizeSelect");
+if (sizeSelect) {
+  sizeSelect.addEventListener("change", () => {
+    // ▼ラジオ全部解除
+    document.querySelectorAll('input[name="size"]').forEach(el => el.checked = false);
+    check();
+  });
+}
 
-check();
-
+// ▼それ以上トグル
 const moreBtn = document.getElementById("moreBtn");
 const moreSizes = document.getElementById("moreSizes");
 
-moreBtn.addEventListener("click", () => {
-  moreSizes.classList.toggle("hidden");
-  moreBtn.textContent = moreSizes.classList.contains("hidden")
-    ? "それ以上 ▼"
-    : "それ以上 ▲";
-});
+if (moreBtn && moreSizes) {
+  moreBtn.addEventListener("click", () => {
+    moreSizes.classList.toggle("hidden");
+    moreBtn.textContent = moreSizes.classList.contains("hidden")
+      ? "それ以上 ▼"
+      : "それ以上 ▲";
+  });
+}
+
+// 初期実行
+check();
