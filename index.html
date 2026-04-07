@@ -36,27 +36,31 @@
 	<h2>サイズ（3辺合計）</h2>
 	
 	<div class="radio-row">
+	
 	  <label><input type="radio" name="size" value="30" checked><span>〜30cm</span></label>
 	  <label><input type="radio" name="size" value="60"><span>〜60cm</span></label>
 	  <label><input type="radio" name="size" value="80"><span>〜80cm</span></label>
 	  <label><input type="radio" name="size" value="100"><span>〜100cm</span></label>
+	
+	  <button type="button" id="moreBtn" class="more-btn">それ以上 ▼</button>
+	
 	</div>
-	<div class="select-wrap">
-	  <select id="sizeSelect">
-	    <option value="">それ以上を選択</option>
-	    <option value="120">〜120cm</option>
-	    <option value="140">〜140cm</option>
-	    <option value="160">〜160cm</option>
-	    <option value="170">〜170cm</option>
-	    <option value="180">〜180cm</option>
-	    <option value="200">〜200cm</option>
-	    <option value="250">〜250cm</option>
-	    <option value="300">〜300cm</option>
-	    <option value="350">〜350cm</option>
-	    <option value="400">〜400cm</option>
-	    <option value="450">〜450cm</option>
-	    <option value="999">450cm以上</option>
-	  </select>
+	
+	<div id="moreSizes" class="radio-row more-sizes hidden">
+	
+	  <label><input type="radio" name="size" value="120"><span>〜120cm</span></label>
+	  <label><input type="radio" name="size" value="140"><span>〜140cm</span></label>
+	  <label><input type="radio" name="size" value="160"><span>〜160cm</span></label>
+	  <label><input type="radio" name="size" value="170"><span>〜170cm</span></label>
+	  <label><input type="radio" name="size" value="180"><span>〜180cm</span></label>
+	  <label><input type="radio" name="size" value="200"><span>〜200cm</span></label>
+	  <label><input type="radio" name="size" value="250"><span>〜250cm</span></label>
+	  <label><input type="radio" name="size" value="300"><span>〜300cm</span></label>
+	  <label><input type="radio" name="size" value="350"><span>〜350cm</span></label>
+	  <label><input type="radio" name="size" value="400"><span>〜400cm</span></label>
+	  <label><input type="radio" name="size" value="450"><span>〜450cm</span></label>
+	　<label><input type="radio" name="size" value="999"><span>450cm以上</span></label>
+	
 	</div>
 
   <h2>重さ</h2>
