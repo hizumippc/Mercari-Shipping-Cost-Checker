@@ -221,9 +221,23 @@ function getValue(name){
   return el ? Number(el.value) : 0;
 }
 
+// ▼表示名 → 実データ変換
+const placeMap = {
+  "ヤマト": "ヤマト運輸営業所",
+  "セブン": "セブン-イレブン",
+  "ファミマ": "ファミリーマート",
+  "ローソン": "ローソン",
+  "郵便局": "郵便局",
+  "ポスト": "ポスト投函",
+  "PUDO": "PUDO",
+  "自宅集荷": "自宅集荷",
+  "PUDO指定場所": "自宅周辺の指定場所に置く"
+};
+
+// ▼チェックされた発送場所取得
 function getCheckedPlaces() {
   return Array.from(document.querySelectorAll('input[name="place"]:checked'))
-    .map(el => el.value);
+    .map(el => placeMap[el.value]);
 }
 
 // ▼サイズ（ラジオのみ）
@@ -239,22 +253,22 @@ function check() {
   const s = getSizeValue();
   const w = getValue("weight");
 
-const selectedPlaces = getCheckedPlaces();
+  const selectedPlaces = getCheckedPlaces();
 
-const available = services.filter(x => {
-  const basicMatch =
-    t <= x.thickness &&
-    s <= x.size &&
-    w <= x.weight;
+  const available = services.filter(x => {
+    const basicMatch =
+      t <= x.thickness &&
+      s <= x.size &&
+      w <= x.weight;
 
-  // ▼発送場所チェックなし → 全部OK
-  if (selectedPlaces.length === 0) return basicMatch;
+    // ▼発送場所チェックなし → 全部OK
+    if (selectedPlaces.length === 0) return basicMatch;
 
-  // ▼発送場所チェックあり → placeに含まれるか
-  const placeMatch = selectedPlaces.some(p => x.place.includes(p));
+    // ▼発送場所チェックあり
+    const placeMatch = selectedPlaces.some(p => x.place.includes(p));
 
-  return basicMatch && placeMatch;
-});
+    return basicMatch && placeMatch;
+  });
 
   if (available.length === 0) {
     resultEl.innerHTML = "該当する配送方法がありません";
@@ -262,16 +276,13 @@ const available = services.filter(x => {
   }
 
   available.sort((a, b) => {
-    // ▼価格優先
     if (a.price !== b.price) return a.price - b.price;
 
-    // ▼30cmならmini優先
     if (s === 30) {
       if (a.name === "ゆうパケットポストmini") return -1;
       if (b.name === "ゆうパケットポストmini") return 1;
     }
 
-    // ▼同額ならゆうパケットプラス優先
     if (a.name === "ゆうパケットプラス") return -1;
     if (b.name === "ゆうパケットプラス") return 1;
 
@@ -300,12 +311,12 @@ const available = services.filter(x => {
   });
 }
 
-// ▼ラジオ変更で再計算
+// ▼全input変更で再計算
 document.querySelectorAll("input").forEach(el=>{
   el.addEventListener("change", check);
 });
 
-// ▼それ以上トグル（折りたたみ）
+// ▼それ以上トグル
 const moreBtn = document.getElementById("moreBtn");
 const moreSizes = document.getElementById("moreSizes");
 
@@ -318,5 +329,5 @@ if (moreBtn && moreSizes) {
   });
 }
 
-// ▼初期表示
+// ▼初期実行
 check();
